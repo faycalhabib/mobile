@@ -1,12 +1,10 @@
 # 📊 UGP Reporter - Générateur de Rapports Automatique
 
-Application desktop moderne pour générer automatiquement des rapports de paiement à partir de fichiers Excel et CSV.
+Application desktop moderne# UGP Reporter 📊
 
-## 🚀 Fonctionnalités
+Système automatisé de génération de rapports de paiement pour UGP - Union des Groupements de Producteurs.
 
-- ✅ **Lecture automatique** des fichiers BulkReport CSV
-- ✅ **Mapping intelligent** des bénéficiaires
-- ✅ **Calcul automatique** des frais
+## 🎯 Fonctionnalités
 - ✅ **Génération de rapports** Excel formatés
 - ✅ **Interface moderne** avec thème sombre
 - ✅ **Gestion d'erreurs robuste**
