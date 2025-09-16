@@ -1,0 +1,24 @@
+{
+  "preferences": {
+    "output_folder": "./outputs",
+    "auto_open_report": true,
+    "keep_backup": true,
+    "language": "fr"
+  },
+  "defaults": {
+    "projet": "UGP",
+    "budget": 500000,
+    "fee_rate": 0.0168,
+    "date_format": "%d/%m/%Y"
+  },
+  "mappings": {
+    "remember_beneficiaries": true,
+    "auto_complete": true
+  },
+  "ui": {
+    "theme": "dark",
+    "window_width": 900,
+    "window_height": 700,
+    "font_size": 11
+  }
+}
