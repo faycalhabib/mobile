@@ -1,0 +1,56 @@
+{
+    "preferences": {
+        "output_folder": "./outputs",
+        "temp_folder": "./temp",
+        "log_folder": "./logs"
+    },
+    "processing": {
+        "auto_retry": true,
+        "max_retries": 3,
+        "retry_delay": 5,
+        "cleanup_after": true,
+        "generate_pdf": true,
+        "send_email": false,
+        "parallel_processing": false,
+        "max_workers": 4
+    },
+    "metadata": {
+        "date_paiement": "AUTO",
+        "libelle": "PAIEMENT SALAIRE",
+        "budget": 5000000,
+        "projet": "UGP",
+        "responsable": "Direction UGP",
+        "validated_by": "AUTO"
+    },
+    "pdf_options": {
+        "quality": "standard",
+        "orientation": "portrait",
+        "fit_to_page": true,
+        "margins": "normal",
+        "include_headers": true,
+        "center_horizontally": true,
+        "center_vertically": false,
+        "grid_lines": false
+    },
+    "notifications": {
+        "desktop_notifications": true,
+        "sound_alerts": true,
+        "telegram_bot": false,
+        "whatsapp": false
+    },
+    "advanced": {
+        "enable_cache": true,
+        "cache_ttl": 3600,
+        "enable_compression": true,
+        "enable_encryption": false,
+        "backup_reports": true,
+        "backup_retention_days": 30
+    },
+    "optimization": {
+        "use_fast_mode": false,
+        "validate_output": true,
+        "fallback_on_error": true,
+        "performance_logging": true,
+        "parallel_operations": false
+    }
+}

@@ -4,6 +4,18 @@ Application desktop moderne# UGP Reporter 📊
 
 Système automatisé de génération de rapports de paiement pour UGP - Union des Groupements de Producteurs.
 
+## ⚡ Nouveau : Mode Turbo (5-8x plus rapide!)
+
+Le système dispose maintenant d'un **mode optimisé** qui génère les rapports en **8-12 secondes** au lieu de 68 secondes !
+
+```bash
+# Activer le mode rapide
+python toggle_fast_mode.py
+
+# Tester les performances
+benchmark.bat
+```
+
 ## 🎯 Fonctionnalités
 - ✅ **Génération de rapports** Excel formatés
 - ✅ **Interface moderne** avec thème sombre

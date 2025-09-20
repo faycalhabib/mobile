@@ -3,6 +3,7 @@ Module de génération de rapports Excel
 """
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Optional
 import pandas as pd
 import logging
@@ -16,40 +17,69 @@ class ReportGenerator:
     def __init__(self, config: dict = None):
         self.config = config or {}
         self.output_dir = self.config.get('preferences', {}).get('output_folder', './outputs')
-        # Ajouter le chemin du template
-        self.template_path = r"C:\Users\faycalhabibahmat\Desktop\Moov\UGP\Rapport UGP.xlsx"
         
-    def generate_report(self, 
-                       processed_df: pd.DataFrame,
-                       metadata: dict,
-                       output_name: Optional[str] = None) -> str:
+    def generate_report(self, data: pd.DataFrame, metadata: dict, output_name: str = None) -> str:
         """
-        Générer le rapport Excel final
+        Génère le rapport Excel à partir des données
         
         Args:
-            processed_df: DataFrame avec les données traitées
-            metadata: Métadonnées du rapport (date, libellé, budget, etc.)
+            data: DataFrame avec les transactions
+            metadata: Métadonnées du rapport
             output_name: Nom du fichier de sortie (optionnel)
             
         Returns:
             Chemin du fichier généré
         """
-        # Créer le nom du fichier si non fourni
-        if not output_name:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            output_name = f"Rapport_UGP_{timestamp}.xlsx"
+        if output_name is None:
+            output_name = f"Rapport_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
-        # Chemin complet
-        output_path = os.path.join(self.output_dir, output_name)
+        output_path = Path(self.config['preferences']['output_folder']) / output_name
         
-        # Créer le dossier de sortie
-        os.makedirs(self.output_dir, exist_ok=True)
+        try:
+            # Vérifier si on doit utiliser le mode rapide
+            use_fast_mode = self.config.get('optimization', {}).get('use_fast_mode', False)
+            
+            if use_fast_mode:
+                logger.info("🚀 Utilisation du FastWriter optimisé")
+                try:
+                    from core.excel_fast_writer import ExcelHybridWriter
+                    template_path = Path(__file__).parent.parent / 'templates' / 'Rapport_template.xlsx'
+                    
+                    # Créer le dossier de sortie si nécessaire
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+                    
+                    # Utiliser le writer rapide
+                    fast_writer = ExcelHybridWriter(
+                        template_path=str(template_path),
+                        output_path=str(output_path)
+                    )
+                    return fast_writer.write_report(data, metadata)
+                    
+                except Exception as e:
+                    logger.warning(f"⚠ FastWriter échoué, fallback au mode classique: {e}")
+                    # Fallback au mode classique
+                    
+            # Mode classique (par défaut ou si fast mode échoue)
+            logger.info("Utilisation de FinalExcelFiller avec win32com")
+            from core.final_excel_filler import FinalExcelFiller
+            template_path = Path(__file__).parent.parent / 'templates' / 'Rapport_template.xlsx'
+            
+            # Créer le dossier de sortie si nécessaire
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            filler = FinalExcelFiller()
+            # Ordre correct des arguments: template_path, output_path, df, metadata
+            success = filler.fill_template(str(template_path), str(output_path), data, metadata)
+            
+            if success:
+                return str(output_path)
+            else:
+                return None
         
-        # Sauvegarder avec le file_handler pour un formatage approprié
-        # FORCER l'utilisation de FinalExcelFiller qui fonctionne
-        from core.final_excel_filler import FinalExcelFiller
-        filler = FinalExcelFiller()
-        logger.info("Utilisation de FinalExcelFiller avec win32com")
+        except Exception as e:
+            logger.error(f"Erreur lors de la génération du rapport: {e}")
+            return None
+
         
         # Ajouter les métadonnées complètes
         full_metadata = {

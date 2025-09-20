@@ -1,0 +1,55 @@
+{
+    "smtp": {
+        "server": "smtp.gmail.com",
+        "port": 587,
+        "use_tls": true,
+        "username": "votre.email@gmail.com",
+        "password": "votre_mot_de_passe_application"
+    },
+    "sender": {
+        "name": "UGP Reporter System",
+        "email": "ugp.reporter@gmail.com"
+    },
+    "partners": [
+        {
+            "name": "Responsable UGP",
+            "email": "responsable@ugp.td",
+            "cc": [],
+            "send_pdf": true,
+            "send_excel": false
+        },
+        {
+            "name": "Directeur Financier",
+            "email": "finance@ugp.td",
+            "cc": ["comptabilite@ugp.td"],
+            "send_pdf": true,
+            "send_excel": true
+        },
+        {
+            "name": "Partenaire Moov",
+            "email": "partenaire@moov.td",
+            "cc": [],
+            "send_pdf": true,
+            "send_excel": false
+        }
+    ],
+    "templates": {
+        "report_ready": "email_templates/report_ready.html",
+        "error_notification": "email_templates/error.html",
+        "weekly_summary": "email_templates/weekly.html"
+    },
+    "branding": {
+        "logo_path": "assets/logo.png",
+        "primary_color": "#2E7D32",
+        "secondary_color": "#66BB6A",
+        "company_name": "Union des Groupements de Producteurs",
+        "website": "https://ugp.td"
+    },
+    "settings": {
+        "max_attachment_size_mb": 25,
+        "compress_attachments": true,
+        "retry_on_failure": true,
+        "max_retries": 3,
+        "include_signature": true
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "watched_folder": "./inbox",
+    "processed_folder": "./processed",
+    "error_folder": "./errors",
+    "check_interval": 5,
+    "file_stability_time": 2,
+    "patterns": {
+        "bulkreport": ["bulkreport", "bulk", "rapport_bulk"],
+        "export": ["export", "beneficiaire", "etat"],
+        "frais": ["frais", "fee", "commission", "tarif"]
+    },
+    "auto_process": true,
+    "archive_processed": true,
+    "send_notifications": true,
+    "notifications": {
+        "on_success": true,
+        "on_error": true,
+        "daily_summary": true
+    }
+}

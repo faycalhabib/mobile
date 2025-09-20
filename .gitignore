@@ -48,6 +48,9 @@ outputs/
 *.xlsx
 *.csv
 
+# Exception for template files
+!templates/*.xlsx
+
 # Config sensible (si besoin)
 # config/settings.json
 
